@@ -6,8 +6,30 @@ public class GraphPaths
     // otherwise returns false. Uses depth-first search algorithm.
     {
         boolean found = false;
-        
-        return false;
+        StackInterface<String> stack = new LinkedStack<String>();
+        graph.clearMarks();
+        stack.push(startVertex);
+        while(!stack.empty() && found == false)
+        {
+            String vertex = stack.pop();
+            if(vertex.equals(endVertex))
+            {
+                found = true;
+            }
+            else
+            {
+                if(!graph.isMarked(vertex))
+                {
+                    graph.markVertex(vertex);
+                    QueueInterface<String> adj = graph.getAdjacentVertices(vertex);
+                    while(!adj.empty())
+                    {
+                        stack.push(adj.remove());
+                    }
+                }
+            }
+        }
+        return found;
     }
 
     public static boolean isPathBF(WeightedGraphInterface<String> graph, 
