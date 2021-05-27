@@ -41,7 +41,7 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
     // tests if graph is full
     public boolean full()
     {
-        return false;
+        return numVerticies == maxVerticies;
     }
     
     // Precondition: Vertex is not already in graph
