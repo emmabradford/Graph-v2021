@@ -23,6 +23,7 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
         marks = new boolean[DEFCAP];
         edges = new int[DEFCAP][DEFCAP];
     }
+    
     public WeightedGraph(int maxV)
     {
         numVerticies = 0;
@@ -34,7 +35,7 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
     // tests if graph is empty
     public boolean empty()
     {
-        return false;
+        return numVerticies == 0;
     }
     
     // tests if graph is full
