@@ -71,7 +71,7 @@ public class GraphPaths
         graph.clearMarks();
         QueueInterface<Flight> result = new LinkedQueue<Flight>();
         QueueInterface<String> vertexs = new LinkedQueue<String>();
-        QueueInterface<Flight> priori = new LinkedQueue<Flight>();
+        PriorityQueue<Flight> priori = new Heap<Flight>();
         Flight f = new Flight(startVertex, startVertex, 0);
         priori.add(f);
         while(!priori.empty())
