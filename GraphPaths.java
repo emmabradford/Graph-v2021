@@ -68,6 +68,36 @@ public class GraphPaths
                                                        String startVertex)
     // Determines the shortest distance from startVertex to every other reachable vertex in graph.
     {
-        return null;
+        graph.clearMarks();
+        QueueInterface<Flight> result = new LinkedQueue<Flight>();
+        QueueInterface<String> vertexs = new LinkedQueue<String>();
+        QueueInterface<Flight> priori = new LinkedQueue<Flight>();
+        Flight f = new Flight(startVertex, startVertex, 0);
+        priori.add(f);
+        while(!priori.empty())
+        {
+            Flight flight = priori.remove();
+            String vertex = flight.getToVertex();
+            if(!graph.isMarked(flight.getToVertex()))
+            {
+                graph.markVertex(vertex);
+                result.add(flight);
+                flight.setFromVertex(flight.getToVertex());
+                int minD = flight.getDistance();
+                vertexs = graph.getAdjacentVertices(flight.getFromVertex());
+                while(!vertexs.empty())
+                {
+                    vertex = vertexs.remove();
+                    if(!graph.isMarked(vertex))
+                    {
+                        flight.setToVertex(vertex);
+                        int d = minD + graph.weightIs(flight.getFromVertex(), vertex);
+                        Flight f2 = new Flight(flight.getFromVertex(), vertex, d);
+                        priori.add(f2);
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
