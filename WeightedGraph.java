@@ -49,9 +49,19 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
     // adds vertex to graph
     public void addVertex(T vertex)
     {
-    
+        verticies[numVerticies] = vertex;
+        for(int index = 0; index < numVerticies; index++)
+        {
+            edges[numVerticies][index] = NULL_EDGE;
+            edges[index][numVerticies] = NULL_EDGE;
+        }
+        numVerticies++;
     }
         
+    public int indexIs(T vertex)
+    {
+    
+    }
     // returns true if graph contains vertex
     public boolean hasVertex(T vertex)
     {
