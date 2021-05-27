@@ -5,6 +5,8 @@ public class GraphPaths
     // Returns true if a path exists on graph, from startVertex to endVertex; 
     // otherwise returns false. Uses depth-first search algorithm.
     {
+        boolean found = false;
+        
         return false;
     }
 
