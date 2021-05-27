@@ -7,6 +7,30 @@
  */
 public class WeightedGraph<T> implements WeightedGraphInterface<T>
 {
+    public static final int NULL_EDGE = 0;
+    private static final int DEFCAP = 50;
+    private int numVerticies;
+    private int maxVerticies;
+    private T[] verticies;
+    private int[][] edges;
+    private boolean[] marks;
+    
+    public WeightedGraph()
+    {
+        numVerticies = 0;
+        maxVerticies = DEFCAP;
+        verticies = (T[]) new Object[DEFCAP];
+        marks = new boolean[DEFCAP];
+        edges = new int[DEFCAP][DEFCAP];
+    }
+    public WeightedGraph(int maxV)
+    {
+        numVerticies = 0;
+        maxVerticies = DEFCAP;
+        verticies = (T[]) new Object[maxV];
+        marks = new boolean[maxV];
+        edges = new int[maxV][maxV];
+    }
     // tests if graph is empty
     public boolean empty()
     {
