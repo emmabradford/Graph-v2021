@@ -37,7 +37,31 @@ public class GraphPaths
     // Returns true if a path exists on graph, from startVertex to endVertex; 
     // otherwise returns false. Uses breadth-first search algorithm.
     {
-        return false;
+        boolean found = false;
+        QueueInterface<String> que = new LinkedQueue<String>();
+        graph.clearMarks();
+        que.add(startVertex);
+        while(!que.empty() && found == false)
+        {
+            String vertex = que.remove();
+            if(vertex.equals(endVertex))
+            {
+                found = true;
+            }
+            else
+            {
+                if(!graph.isMarked(vertex))
+                {
+                    graph.markVertex(vertex);
+                    QueueInterface<String> adj = graph.getAdjacentVertices(vertex);
+                    while(!adj.empty())
+                    {
+                        que.add(adj.remove());
+                    }
+                }
+            }
+        }
+        return found;
     }
 
     public static QueueInterface<Flight> shortestPaths(WeightedGraphInterface<String> graph, 
