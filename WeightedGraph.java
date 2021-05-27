@@ -60,31 +60,59 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
         
     public int indexIs(T vertex)
     {
-    
+        int index = 0;
+        while(!vertex.equals(verticies[index]))
+        {
+            index++;
+        }
+        return index;
     }
+    
     // returns true if graph contains vertex
     public boolean hasVertex(T vertex)
     {
+        for(int i = 0; i < verticies.length; i++)
+        {
+            if(verticies[i] != null && verticies[i].equals(vertex))
+            {
+                return true;
+            }
+        }
         return false;
     }
     
     // adds an edge with the specified weight from fromVertex to toVertex
     public void setEdge(T fromVertex, T toVertex,int weight)
     {
-        
+        int row = indexIs(fromVertex);
+        int col = indexIs(toVertex);
+        edges[row][col] = weight;
     }
+    
     
     // if edge from fromVertex to toVertex exists, return the weight of
     // the edge; otherwise, returns a special "null-edge" value.
     public int weightIs(T fromVertex, T toVertex)
     {
-        return -1;
+        int row = indexIs(fromVertex);
+        int col = indexIs(toVertex);
+        return edges[row][col];
     }
     
     // returns a queue of the vertices that are adjacent to the vertex
     public QueueInterface<T> getAdjacentVertices(T vertex)
     {
-        return null;
+        QueueInterface<T> adj = new LinkedQueue<T>();
+        int fromIndex;
+        int toIndex;
+        fromIndex = indexIs(vertex);
+        for(toIndex = 0; toIndex < numVerticies; toIndex++)
+        {
+            if(edges[fromIndex][toIndex] != NULL_EDGE)
+            {
+                adj.add(verticies[toIndex]);
+            }
+        }
     }
     
     // sets marks for all vertices to false
@@ -114,6 +142,22 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
     // return a String representation of this graph
    public  String toString()
    {
-       return "";
+       String result = "\nGraph representation:\n\t";
+        for(int i = 0; i < verticies.length; i++)
+            if(verticies[i] != null)
+                result += ((String)verticies[i]).substring(0, 3) + "\t";
+        result += "\n";
+        for(int r = 0; r < verticies.length; r++)
+            if(verticies[r] != null)
+            {
+                result += ((String)verticies[r]).substring(0, 3) + "\t";
+                for(int c = 0; c < verticies.length; c++)
+                {
+                    if(verticies[c] != null)
+                        result += edges[r][c] + "\t";
+                }
+                result += "\n";
+            }
+        return result;
     }
 }
